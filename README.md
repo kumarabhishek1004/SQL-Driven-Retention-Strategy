@@ -107,21 +107,29 @@ The SQL file contains 12+ queries organized by business question:
 ## File Structure
 
 ```
-project/
-├── Dataset.csv                     # Source data (3,900 customers)
-├── 01_data_preparation.py          # Cleaning + feature engineering
-├── customer_features.csv           # Enriched dataset
-├── feature_correlations.csv        # Feature correlation matrix
-├── loyalty_comparison.csv          # Loyalty definition comparison
-├── 02_db_setup.py                  # SQLite setup + query execution
-├── 02_segmentation.sql             # All SQL queries (12+ queries)
-├── customer_intel.db               # SQLite database
-├── 03_generate_dashboard_data.py   # Export JSON from DB
-├── 03_dashboard/
-│   ├── index.html                  # Interactive 4-panel dashboard
-│   └── dashboard_data.json         # Pre-computed visualization data
-├── 04_playbook.md                  # Retention playbook + exec summary
-└── README.md                       # This file
+sql-driven-retention-strategy/
+├── README.md
+├── data/
+│   ├── Dataset.csv
+│   ├── customer_features.csv
+│   ├── feature_correlations.csv
+│   └── loyalty_comparison.csv
+├── python/
+│   ├── 01_data_preparation.py
+│   ├── 02_db_setup.py
+│   └── 03_generate_dashboard_data.py
+├── sql/
+│   └── 02_segmentation.sql
+├── database/
+│   └── customer_intel.db
+├── dashboard/
+│   ├── index.html
+│   └── dashboard_data.json
+├── playbook/
+│   └── 04_playbook.md
+└── documentation/
+    ├── PS.pdf
+    └── PS.txt
 ```
 
 ## Technology Stack
