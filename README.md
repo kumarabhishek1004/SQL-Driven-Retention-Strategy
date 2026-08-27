@@ -12,64 +12,73 @@ A comprehensive customer intelligence project for a D2C fashion brand, analyzing
 
 ## Deliverables
 
-| Deliverable | File | Description |
-|---|---|---|
-| **Data Preparation** | `01_data_preparation.py` | Cleans data, engineers 8 features with full justification |
-| **Enriched Dataset** | `customer_features.csv` | 3,900 customers × 26 columns (18 original + 8 engineered) |
-| **SQL Database** | `customer_intel.db` | SQLite database with all customer features |
-| **Segmentation Queries** | `02_segmentation.sql` | 12+ SQL queries answering 5 core business questions |
-| **Dashboard Data** | `03_dashboard/dashboard_data.json` | Pre-computed JSON for visualization |
-| **Interactive Dashboard** | `03_dashboard/index.html` | 4-panel Chart.js dashboard (open in browser) |
-| **Retention Playbook** | `04_playbook.md` | Promo sunset plan + ideal customer profile + exec summary |
-| **Feature Analysis** | `feature_correlations.csv` | Correlation matrix of all engineered features |
-| **Loyalty Comparison** | `loyalty_comparison.csv` | Score A vs Score B vs Score C comparison |
+| Deliverable               | File                            | Description                                               |
+| ------------------------- | ------------------------------- | --------------------------------------------------------- |
+| **Data Preparation**      | `python/01_data_preparation.py` | Cleans data, engineers 8 features with full justification |
+| **Enriched Dataset**      | `data/customer_features.csv`    | 3,900 customers × 26 columns (18 original + 8 engineered) |
+| **SQL Database**          | `database/customer_intel.db`    | SQLite database with all customer features                |
+| **Segmentation Queries**  | `sql/02_segmentation.sql`       | 12+ SQL queries answering 5 core business questions       |
+| **Dashboard Data**        | `dashboard/dashboard_data.json` | Pre-computed JSON for visualization                       |
+| **Interactive Dashboard** | `dashboard/index.html`          | 4-panel Chart.js dashboard (open in browser)              |
+| **Retention Playbook**    | `playbook/04_playbook.md`       | Promo sunset plan + ideal customer profile + exec summary |
+| **Feature Analysis**      | `data/feature_correlations.csv` | Correlation matrix of all engineered features             |
+| **Loyalty Comparison**    | `data/loyalty_comparison.csv`   | Score A vs Score B vs Score C comparison                  |
 
 ## Quick Start
 
 ### Prerequisites
-- Python 3.10+
-- pandas, scikit-learn, numpy (for data preparation)
-- SQLite (bundled with Python)
-- A modern web browser (for dashboard)
+
+* Python 3.10+
+* pandas, scikit-learn, numpy (for data preparation)
+* SQLite (bundled with Python)
+* A modern web browser (for dashboard)
 
 ### Step 1: Data Preparation
+
 ```bash
-python 01_data_preparation.py
+python python/01_data_preparation.py
 ```
-Outputs: `customer_features.csv`, `feature_correlations.csv`, `loyalty_comparison.csv`
+
+Outputs: `data/customer_features.csv`, `data/feature_correlations.csv`, `data/loyalty_comparison.csv`
 
 ### Step 2: Database Setup & Queries
+
 ```bash
-python 02_db_setup.py
+python python/02_db_setup.py
 ```
-Creates `customer_intel.db` and executes all segmentation queries.
+
+Creates `database/customer_intel.db` and executes all segmentation queries.
 
 ### Step 3: Generate Dashboard Data
-```bash
-python 03_generate_dashboard_data.py
-```
-Outputs: `03_dashboard/dashboard_data.json`
 
-### Step 4: Build inline Dashboard
 ```bash
-python 03_build_inline.py
+python python/03_generate_dashboard_data.py
+```
+
+Outputs: `dashboard/dashboard_data.json`
+
+### Step 4: Build Inline Dashboard
+
+```bash
+python python/03_build_inline.py
 ```
 
 ### Step 5: View Dashboard
-Open `03_dashboard/index.html` in your browser. The dashboard loads data from the JSON file.
+
+Open `dashboard/index.html` in your browser. The dashboard loads data from the JSON file.
 
 ## Engineered Features
 
-| Feature | Type | Business Purpose |
-|---|---|---|
-| `loyalty_score_a` | 0–100 | Frequency-based loyalty (how often) |
-| `loyalty_score_b` | 0–100 | Value-based loyalty (how much) |
-| `loyalty_score_c` | 0–100 | Hybrid ensemble (balanced view) |
-| `promo_dependency_score` | 0–100 | Reliance on discounts |
-| `value_tier` | Category | Platinum / Gold / Silver / Bronze |
-| `satisfaction_flag` | Category | Satisfied / Neutral / At Risk |
-| `category_affinity` | Category | Preferred product category |
-| `seasonal_breadth` | 1–4 | Number of seasons engaged |
+| Feature                  | Type     | Business Purpose                    |
+| ------------------------ | -------- | ----------------------------------- |
+| `loyalty_score_a`        | 0–100    | Frequency-based loyalty (how often) |
+| `loyalty_score_b`        | 0–100    | Value-based loyalty (how much)      |
+| `loyalty_score_c`        | 0–100    | Hybrid ensemble (balanced view)     |
+| `promo_dependency_score` | 0–100    | Reliance on discounts               |
+| `value_tier`             | Category | Platinum / Gold / Silver / Bronze   |
+| `satisfaction_flag`      | Category | Satisfied / Neutral / At Risk       |
+| `category_affinity`      | Category | Preferred product category          |
+| `seasonal_breadth`       | 1–4      | Number of seasons engaged           |
 
 ## SQL Segmentation Queries
 
@@ -89,24 +98,24 @@ The SQL file contains 12+ queries organized by business question:
 
 ## Dashboard Panels
 
-| Panel | Chart Type | What It Shows |
-|---|---|---|
-| **Customer Pyramid** | Bar + Line | Tier distribution + revenue contribution |
-| **Promo vs Retention** | Scatter | Promo dependency vs loyalty (color = tier) |
+| Panel                      | Chart Type     | What It Shows                              |
+| -------------------------- | -------------- | ------------------------------------------ |
+| **Customer Pyramid**       | Bar + Line     | Tier distribution + revenue contribution   |
+| **Promo vs Retention**     | Scatter        | Promo dependency vs loyalty (color = tier) |
 | **Geographic Opportunity** | Horizontal Bar | Top 15 states by organic opportunity score |
-| **Category Funnel** | Bar + Line | Categories ranked by retention signal |
+| **Category Funnel**        | Bar + Line     | Categories ranked by retention signal      |
 
 ## Key Findings
 
-- **49.4% of customers are organic or semi-organic buyers** — the brand has real loyalty
-- **Top 20% generate only 31% of revenue** — flat distribution, broad retention needed
-- **17.4% are at-risk** (low satisfaction) — highest-ROI retention target
-- **Arizona, Kansas, Alaska** are top organic opportunity states
-- **Gold tier no-promo buyers** are the safest first target for promo sunset
+* **49.4% of customers are organic or semi-organic buyers** — the brand has real loyalty
+* **Top 20% generate only 31% of revenue** — flat distribution, broad retention needed
+* **17.4% are at-risk** (low satisfaction) — highest-ROI retention target
+* **Arizona, Kansas, Alaska** are top organic opportunity states
+* **Gold tier no-promo buyers** are the safest first target for promo sunset
 
 ## File Structure
 
-```
+```text
 sql-driven-retention-strategy/
 ├── README.md
 ├── data/
@@ -117,6 +126,7 @@ sql-driven-retention-strategy/
 ├── python/
 │   ├── 01_data_preparation.py
 │   ├── 02_db_setup.py
+│   ├── 03_build_inline.py
 │   └── 03_generate_dashboard_data.py
 ├── sql/
 │   └── 02_segmentation.sql
@@ -134,11 +144,12 @@ sql-driven-retention-strategy/
 
 ## Technology Stack
 
-- **Python 3.13** — Data preparation and feature engineering
-- **pandas / scikit-learn / numpy** — Data manipulation and clustering
-- **SQLite** — Query layer (portable, zero-dependency)
-- **Chart.js** — Interactive dashboard visualization
-- **HTML/CSS/JS** — Static dashboard (no server required)
+* **Python 3.13** — Data preparation and feature engineering
+* **pandas / scikit-learn / numpy** — Data manipulation and clustering
+* **SQLite** — Query layer (portable, zero-dependency)
+* **SQL** — Customer segmentation and business analysis
+* **Chart.js** — Interactive dashboard visualization
+* **HTML/CSS/JS** — Static dashboard (no server required)
 
 ---
 
